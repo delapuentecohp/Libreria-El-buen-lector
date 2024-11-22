@@ -4,6 +4,8 @@ import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import java.util.List;
+import java.util.Objects;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public record RDatosLibros(
 
@@ -15,9 +17,13 @@ public record RDatosLibros(
 
     @Override
     public String toString() {
+        String idioma = "";
+        if (Objects.equals(idiomas.get(0), "es")){idioma = "Español";}
+        if (Objects.equals(idiomas.get(0), "en")){idioma = "Ingles";}
+        if (Objects.equals(idiomas.get(0), "fri")){idioma = "Frances";}
         return  "       Titulo: " + titulo +
                 "\t\n       Autor: " + autor.toString().replace("[","").replace("]","") +
-                "\t\n       Idioma: " + idiomas.toString().replace("[","").replace("]","") +
+                "\t\n       Idioma: " + idioma +
                 "\t\n       Numero de Descargas: " + numeroDescargas;
     }
 }

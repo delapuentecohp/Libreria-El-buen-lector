@@ -40,8 +40,7 @@ public class Principal {
             System.out.println("\t|  2.- Buscar Libros por autor        |");
             System.out.println("\t|  3.- Buscar Libros por idioma       |");
             System.out.println("\t|  4.- Top 10 libros mas descargados  |");
-            System.out.println("\t|  5.- Top 10 libros mejor ranqueados |");
-            System.out.println("\t|  6.- Ver libros guardados           |");
+            System.out.println("\t|  5.- Ver libros guardados           |");
             System.out.println("\t|  0.- Salir                          |");
             System.out.println("\t---------------------------------------");
             System.out.print("\t Ingrese una Opcion: ");
@@ -82,8 +81,40 @@ public class Principal {
                     Funciones.presionarTecla();
                     break;
 
-
+                //Buscar libro por idiomas
                 case '3':
+                    int x = 0;
+                    do {
+                        System.out.printf("\t Ingrese el idioma (Español-Ingles-Frances): ");
+                        var idioma = teclado.nextLine();
+                        var idioma1 = idioma.toUpperCase();
+                        if (idioma1.equals("ESPAÑOL")) {
+                            idioma1 = "es";
+                            x = 1;
+                        }
+                        if (idioma1.equals("INGLES")) {
+                            idioma1 = "en";
+                            x = 1;
+                        }
+                        if (idioma1.equals("FRANCES")) {
+                            idioma1 = "fr";
+                            x = 1;
+                        }
+
+                        if (x == 0) {
+                            System.out.println(Variables.rojo+"\t\n     Idioma ingresado es incorrecto. Debe ingresar los idiomas Español, Ingles o Frances.\n"+Variables.b);
+                        } else {
+                            var jsonIdioma = obtenerAPI.obtenerAPI(URL_BASE + "?languages=" + idioma1);
+                            var datosBusquedaIdioma = libros.obtenerDatos(jsonIdioma, RDatos.class);
+                            System.out.println("\t\n     Libros Encontrado en " + idioma.toUpperCase() + "  \n");
+                            datosBusquedaIdioma.libros().stream()
+                                    .map(l -> l.titulo().toUpperCase())
+                                    .forEach((k) -> {
+                                        System.out.print("\t  " + k + "\n");
+                                    });
+                            Funciones.presionarTecla();
+                        }
+                    }while (x == 0);
                     break;
 
                 // Top 10 libros mas descargados
@@ -102,9 +133,6 @@ public class Principal {
                     break;
 
                 case '5':
-                    break;
-
-                case '6':
                     break;
 
                 case '0':
