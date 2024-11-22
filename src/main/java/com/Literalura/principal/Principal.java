@@ -36,7 +36,7 @@ public class Principal {
             System.out.println("\t-----------------------------------");
             System.out.println("\t| **** "+Variables.fGris+"Libreria El buen Lector"+Variables.b+" ****** |");
             System.out.println("\t---------------------------------------");
-            System.out.println("\t|  1.- Buscar Libro por su nombre     |");
+            System.out.println("\t|  1.- Buscar Libro por titulo        |");
             System.out.println("\t|  2.- Buscar Libros por autor        |");
             System.out.println("\t|  3.- Buscar Libros por idioma       |");
             System.out.println("\t|  4.- Top 10 libros mas descargados  |");
@@ -58,8 +58,9 @@ public class Principal {
                             .filter(l -> l.titulo().toUpperCase().contains(nombreLibro.toUpperCase()))
                             .findFirst();
                     if (libroBuscado.isPresent()) {
-                        System.out.println("\t\n     Libro Encontrado");
+                        System.out.println("\t\n       ----------Libro-----------");
                         System.out.println(libroBuscado.get());
+                        System.out.println("\t\n       --------------------------");
                         Funciones.presionarTecla();
                     } else {
                         System.out.println("libro no encontrado");
