@@ -5,6 +5,7 @@ import com.Literalura.servicios.DatosLibros;
 import com.Literalura.servicios.ObtenerAPI;
 
 import java.util.Comparator;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.Scanner;
 
@@ -61,7 +62,19 @@ public class Principal {
                         System.out.println("\t\n       ----------Libro-----------");
                         System.out.println(libroBuscado.get());
                         System.out.println("\t\n       --------------------------");
-                        Funciones.presionarTecla();
+                        Scanner teclado = new Scanner(System.in);
+                        System.out.printf("\t\n ¿Desea guardar el libro en la base de datos Si o No?: ");
+                        var op=teclado.nextLine().toUpperCase();
+                        if (Objects.equals(op, "SI")){
+                            System.out.println("Datos guardados");
+                        }else{
+                            try
+                            {
+                                teclado.nextLine();
+                            }
+                            catch(Exception e)
+                            {}
+                        }
                     } else {
                         System.out.println("libro no encontrado");
                     }
